@@ -169,8 +169,8 @@ def strToNumMonth(month):
 
 
 if __name__ == "__main__":
-    #years = range(2021, 2023, 1)
-    #months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']
+    #years = range(2022, 2023, 1)
+    #months = ['Aug']
 
     years = range(2007, 2023, 1)
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -184,6 +184,9 @@ if __name__ == "__main__":
         for m in months:
 
             file_path = expanduser("~") + '\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common\\Files\\News\\FF\\' + str(y) + '.' + str(strToNumMonth(m)) + '.01.csv'
+
+            if exists(file_path + '.old'):
+                os.remove(file_path + '.old')
 
             if exists(file_path):
                 os.rename(file_path, file_path + '.old')

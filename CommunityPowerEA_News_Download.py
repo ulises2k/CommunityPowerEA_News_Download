@@ -15,6 +15,9 @@ import os
 from os.path import expanduser
 from os.path import exists
 
+#pip install cloudscraper
+#pip install bs4
+#
 def getEventsCalendar(start_date, file_path):
 
     # Used to hold event time as not all event times have a time if multiple news events start at the same time
@@ -54,11 +57,8 @@ def getEventsCalendar(start_date, file_path):
                 day_of_week = matchObj.group(1)
                 month = strToNumMonth(matchObj.group(2))
                 day = format(int(matchObj.group(3)), "02")
-            print('-------------------------------------------------------------------------------')
-            print("Day:" + str(day) + " Month:" + str(month) + " Year:" + str(year))
-            print(row.text)
 
-
+            #print(row.text)
             calendar__time = row.find('td', class_='calendar__time').text.strip()
             calendar__currency = row.find('td', class_='calendar__currency').text.strip()
             calendar__impact = row.find('td', class_='calendar__impact').find('div', class_='calendar__impact-icon').find('span')['class'][0]
@@ -74,6 +74,9 @@ def getEventsCalendar(start_date, file_path):
             forecast = calendar__forecast
             actual = calendar__actual
             event_time = calendar__time
+            print('---------------------------------------------------------------------------------------')
+            print("Day:" + str(day) + " Month:" + str(month) + " Year:" + str(year))            
+            print(f'time:{event_time} - currency:{currency} - impact:{impact} - event:{event} - actual:{actual} - forecast:{forecast} - previous:{previous}')
 
             if impact == 'high':
                 impact = '3'
@@ -169,10 +172,10 @@ def strToNumMonth(month):
 
 
 if __name__ == "__main__":
-    #years = range(2022, 2023, 1)
+    years = range(2007, 2023, 1)
     #months = ['Aug']
 
-    years = range(2007, 2023, 1)
+    #years = range(2007, 2023, 1)
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
     abs_path = os.path.abspath(__file__)
